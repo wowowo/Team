@@ -69,7 +69,8 @@ public class StartMenu extends GameState {
 			if(currentChoice == 0)
 				gm.changeState(new InGameState(gm));
 			
-			else System.exit(0);
+		else if (k == KeyEvent.VK_ESCAPE)
+			System.exit(0);
 		}
 		
 		
