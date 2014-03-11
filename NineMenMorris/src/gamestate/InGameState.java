@@ -18,6 +18,12 @@ import utility.BoardGrid;
 public class InGameState extends GameState {
 	
 	private Background bg = new Background("res/boards/unnamed.png");
+	private GameState currentGameState;
+	private boolean playerOneTurn = false;
+	private GameSetUpState playerOneSetup;
+	private GameSetUpState playerTwoSetup;
+	private TurnState playerOne ;
+	private TurnState playerTwo;
 	
 	//not implemented
 	private BoardGrid grid = new BoardGrid();
