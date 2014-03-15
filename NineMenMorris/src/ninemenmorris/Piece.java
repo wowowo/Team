@@ -1,4 +1,4 @@
-package entities;
+package ninemenmorris;
 
 import java.awt.Graphics2D;
 

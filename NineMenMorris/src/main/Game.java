@@ -1,7 +1,6 @@
 package main;
 
 import gamestate.GameStateManager;
-import gamestate.StartMenu;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -14,6 +13,9 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import utility.Menu;
+
 
 /**
  * The class that handles the drawing, updates and input at the top level.
@@ -29,21 +31,24 @@ public class Game extends JPanel implements Runnable, KeyListener, MouseListener
 	 * 
 	 * Set the preferred size and request focus
 	 */
-	public Game() {
+	public Game(GameStateManager manager,int w, int h) {
 
+		
 		super();
+		HEIGHT = h;
+		WIDTH = w;
 		setPreferredSize(new Dimension(WIDTH , HEIGHT));
 		setFocusable(true);
 		requestFocus();
+		this.manager = manager;
 
 	}
 
 	private static final long serialVersionUID = -7600755214008009002L;
-	public static final int HEIGHT = 400;
-	public static final int WIDTH = 600;
+	public static  int HEIGHT = 400;
+	public static  int WIDTH  = 600;
 
 	private volatile boolean running = false;
-	private volatile boolean gameOver = false;
 	private GameStateManager manager;
 	private Thread animator;
 	private BufferedImage image;
@@ -84,8 +89,6 @@ public class Game extends JPanel implements Runnable, KeyListener, MouseListener
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		g = image.createGraphics();
 		
-		manager = new GameStateManager();
-		manager.changeState(new StartMenu(manager));
 		
 		running = true;
 
@@ -117,20 +120,7 @@ public class Game extends JPanel implements Runnable, KeyListener, MouseListener
 	}
 
 
-	/**
-	 * Create a Jframe and add the game to it
-	 * @param args
-	 */
-	public static void main(String[] args) {
 
-		JFrame frame = new JFrame();
-		frame.setContentPane(new Game());
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
 
 	// INPUT METHODS
 	

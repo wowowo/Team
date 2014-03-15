@@ -1,8 +1,7 @@
 package gamestate;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
+
+import java.util.ArrayList;
 
 /**
  * Class that is the link between the animator and the 
@@ -14,8 +13,8 @@ import java.awt.Graphics2D;
  */
 public class GameStateManager {
 	
-	private GameState currentState;
-	private GameState lastState;
+	private int currentState;
+	private ArrayList<GameState> states = new ArrayList<GameState>();
 	
 	
 	/**
@@ -23,22 +22,20 @@ public class GameStateManager {
 	 * temp to switch between menu and game
 	 * @param gameState
 	 */
-	public void changeState(GameState gameState) {
+	public void changeState(int i) {
 		
-		lastState = currentState;
-		currentState = gameState;
-		currentState.init();
+		currentState = i;
+		states.get(currentState).init();
 		
 	}
 	
 	/**
-	 * go back to last state
+	 * add  a new state to the list
+	 * @param state
 	 */
-	public void reverseState() {
+	public void addState(GameState state) {
 		
-		GameState temp = lastState;
-		lastState = currentState;
-		currentState = temp;
+		states.add(state);
 		
 	}
 	
@@ -49,7 +46,7 @@ public class GameStateManager {
 	 */
 	public void draw(java.awt.Graphics2D g) {
 		
-		currentState.draw(g);
+		states.get(currentState).draw(g);
 		
 	}
 
@@ -58,7 +55,7 @@ public class GameStateManager {
 	 */
 	public void update() {
 		
-		currentState.update();
+		states.get(currentState).update();
 		
 	}
 	
@@ -66,31 +63,31 @@ public class GameStateManager {
 	
 	public void keyPressed(int k) {
 		
-		currentState.keyPressed(k);
+		states.get(currentState).keyPressed(k);
 		
 	}
 	
 	public void keyReleased(int k) {
 		
-		currentState.keyReleased(k);
+		states.get(currentState).keyReleased(k);
 
 	}
 	
 	public void mouseClick(int x, int y) {
 		
-		currentState.mouseClick(x, y);
+		states.get(currentState).mouseClick(x, y);
 		
 	}
 	
 	public void mouseReleased(int b) {
 		
-		currentState.mouseRelease(b);
+		states.get(currentState).mouseRelease(b);
 		
 	}
 	
 	public void mousePressed(int x, int y, int b) {
 		
-		currentState.mousePressed(x, y, b);
+		states.get(currentState).mousePressed(x, y, b);
 		
 	}
 

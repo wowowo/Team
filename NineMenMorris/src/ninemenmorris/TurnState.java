@@ -1,10 +1,17 @@
-package gamestate;
+package ninemenmorris;
 
+import gamestate.GameState;
+import gamestate.GameStateManager;
+
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
-public class TurnState extends GameState{
+public class TurnState extends GameState {
+	
+	private ArrayList<Piece> pieces = new ArrayList<Piece>();
 
-	public TurnState(GameStateManager gm) {
+	public TurnState(GameStateManager gm, Color color) {
 		super(gm);
 		// TODO Auto-generated constructor stub
 	}

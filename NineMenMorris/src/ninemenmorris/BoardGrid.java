@@ -1,4 +1,4 @@
-package utility;
+package ninemenmorris;
 
 /**
  * Data structure to make checking 

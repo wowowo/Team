@@ -22,8 +22,10 @@ public class Background implements Drawable{
 	private BufferedImage bg;
 	private int x,y,width,height;
 	
-	public Background(String s) {
+	public Background(String s,int w, int h) {
 		
+		width = w;
+		height = h;
 		try {
 			bg = ImageIO.read(new File(s));
 		} catch (IOException e) {
@@ -33,11 +35,8 @@ public class Background implements Drawable{
 		/**
 		 * Stretch to fit the entire window
 		 */
-		width = bg.getWidth() + Game.WIDTH - bg.getWidth();
-		height = bg.getHeight() + Game.HEIGHT - bg.getHeight();
-
-		
-		
+		width = bg.getWidth() + width - bg.getWidth();
+		height = bg.getHeight() + height - bg.getHeight();
 		
 	}
 	

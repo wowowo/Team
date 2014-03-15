@@ -1,12 +1,13 @@
-package gamestate;
+package ninemenmorris;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import entities.Piece;
+
+import gamestate.GameState;
+import gamestate.GameStateManager;
 
 import utility.Background;
-import utility.BoardGrid;
 
 /**
  * Holds information about everytihng in the game :
@@ -17,11 +18,9 @@ import utility.BoardGrid;
  */
 public class InGameState extends GameState {
 	
-	private Background bg = new Background("res/boards/unnamed.png");
+	private Background bg = new Background("res/boards/unnamed.png",400,600);
 	private GameState currentGameState;
 	private boolean playerOneTurn = false;
-	private GameSetUpState playerOneSetup;
-	private GameSetUpState playerTwoSetup;
 	private TurnState playerOne ;
 	private TurnState playerTwo;
 	
@@ -29,7 +28,7 @@ public class InGameState extends GameState {
 	private BoardGrid grid = new BoardGrid();
 	private ArrayList<Piece> pieces = new ArrayList<Piece>();
 
-	public InGameState(GameStateManager gm) {
+	public InGameState(GameStateManager gm, int w, int h) {
 		super(gm);
 	}
 
