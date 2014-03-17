@@ -103,7 +103,7 @@ public abstract class Menu extends GameState {
 	}
 
 	@Override
-	public void mouseRelease(int b) {
+	public void mouseReleased(int x, int y, int b) {
 		
 	}
 

@@ -1,5 +1,6 @@
 package ninemenmorris;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
@@ -18,18 +19,18 @@ import utility.Background;
  */
 public class InGameState extends GameState {
 	
-	private Background bg = new Background("res/boards/unnamed.png",400,600);
-	private GameState currentGameState;
-	private boolean playerOneTurn = false;
-	private TurnState playerOne ;
-	private TurnState playerTwo;
+	private Background bg = new Background("res/boards/unnamed.png",600,400);
+	private int currentPlayer = 0;
+	private Board grid = new Board();
+	private TurnState[] players = new TurnState[2];
 	
-	//not implemented
-	private BoardGrid grid = new BoardGrid();
-	private ArrayList<Piece> pieces = new ArrayList<Piece>();
 
-	public InGameState(GameStateManager gm, int w, int h) {
+	public InGameState(GameStateManager gm) {
+		
 		super(gm);
+		
+
+
 	}
 
 	/**
@@ -38,6 +39,9 @@ public class InGameState extends GameState {
 	public void draw(Graphics2D g) {
 
 		bg.draw(g);
+		players[0].draw(g);
+		players[1].draw(g);
+
 	}
 
 	/**
@@ -45,8 +49,9 @@ public class InGameState extends GameState {
 	 * checking for three in a row ...
 	 */
 	public void update() {
-
 		
+		if(players[currentPlayer].isFinished())
+			currentPlayer = (currentPlayer + 1) % 2;
 	}
 	
 	// what to do if key is pressed, or mouse is clicked
@@ -65,26 +70,43 @@ public class InGameState extends GameState {
 
 	@Override
 	public void mouseClick(int x, int y) {
-		// TODO Auto-generated method stub
+
+		players[currentPlayer].mouseClick(x, y);
 
 	}
 
-	@Override
-	public void mouseRelease(int b) {
-		// TODO Auto-generated method stub
+	
+	public void mouseReleased(int x, int y, int b) {
+		
+		if(players[currentPlayer].toTake()) {
+			int i = players[(currentPlayer + 1) % 2].pos(x, y);
+			if (i >= 0) {
+				players[(currentPlayer + 1) % 2].removePiece(i);
+				Board.removePiece(i);
+				players[currentPlayer].took();
+				players[currentPlayer].isFinished();
 
+			}
+		}
+		
+		else	
+			players[currentPlayer].mouseReleased(x, y, b);
+		
 	}
 
 	@Override
 	public void mousePressed(int x, int y, int b) {
-		// TODO Auto-generated method stub
-
+			
+		players[currentPlayer].mousePressed(x, y, b);
+		
 	}
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-
+		
+		players[0] = new TurnState(gm, Color.WHITE, 20);
+		players[1] = new TurnState(gm, Color.BLACK, 350);
+		
 	}
 
 }

@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
@@ -24,7 +25,7 @@ import utility.Menu;
  * @author User
  *
  */
-public class Game extends JPanel implements Runnable, KeyListener, MouseListener {
+public class Game extends JPanel implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 
 	/**
 	 * Constructor
@@ -63,6 +64,7 @@ public class Game extends JPanel implements Runnable, KeyListener, MouseListener
 
 		super.addNotify();
 		addMouseListener(this);
+		addMouseMotionListener(this);
 		addKeyListener(this);
 		animator = new Thread(this);
 		animator.start();
@@ -172,13 +174,33 @@ public class Game extends JPanel implements Runnable, KeyListener, MouseListener
 		manager.mousePressed(e.getX(), e.getY(), e.getButton());
 		
 	}
+	
 
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 
-		manager.mouseReleased(e.getButton());
+		manager.mouseReleased(e.getX(), e.getY(),e.getButton());
 
+	}
+
+
+
+
+	//needs fixing, done this way because lazy
+	public void mouseDragged(MouseEvent e) {
+		
+		manager.mouseClick(e.getX(), e.getY());
+		
+	}
+
+
+
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

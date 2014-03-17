@@ -18,6 +18,7 @@ public class Start {
 
 		GameStateManager nmm = new GameStateManager();
 		nmm.addState(new NMMStartMenu(nmm));
+		nmm.addState(new InGameState(nmm));
 		nmm.changeState(0);
 		
 		JFrame frame = new JFrame();

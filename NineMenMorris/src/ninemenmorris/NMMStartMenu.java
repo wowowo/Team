@@ -42,7 +42,7 @@ public class NMMStartMenu extends Menu{
 		else if (k == KeyEvent.VK_ENTER) {
 
 			if(currentChoice == 0)
-				gm.changeState(0);
+				gm.changeState(1);
 			
 			else if (currentChoice == 2)
 				System.exit(0);

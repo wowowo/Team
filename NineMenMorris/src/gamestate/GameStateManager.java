@@ -79,9 +79,9 @@ public class GameStateManager {
 		
 	}
 	
-	public void mouseReleased(int b) {
+	public void mouseReleased(int b, int i, int j) {
 		
-		states.get(currentState).mouseRelease(b);
+		states.get(currentState).mouseReleased(b, i, b);
 		
 	}
 	

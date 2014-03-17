@@ -22,7 +22,7 @@ public abstract class GameState implements Drawable{
 
 	public abstract void mouseClick(int x, int y);
 	
-	public abstract void mouseRelease(int b);
+	public abstract void mouseReleased(int b, int i, int b2);
 	
 	public abstract void mousePressed(int x, int y, int b);
 	
